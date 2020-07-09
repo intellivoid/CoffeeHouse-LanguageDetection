@@ -65,13 +65,12 @@ class ContentLanguageIdentifier:
         else:
             return "un"
 
-    def identify_topn_langs(self, text, topn=3):
+    def identify_topn_langs(self, text):
         """
         Identify the ``topn`` most probable languages identified in ``text``.
 
         Args:
             text (str)
-            topn (int)
 
         Returns:
             List[Tuple[str, float]]: 2-letter language code and its probability
@@ -83,8 +82,17 @@ class ContentLanguageIdentifier:
                 zip(self.pipeline.classes_, self.pipeline.predict_proba(text_).flat),
                 key=operator.itemgetter(1),
                 reverse=True,
-            )[:topn]
-            return [(lang.item(), prob.item()) for lang, prob in lang_probs]
+            )
+            items = [(lang.item(), prob.item()) for lang, prob in lang_probs]
+            return_results = []
+
+            for probability in items:
+                return_results.append({
+                    "language": list(probability)[0],
+                    "probability": list(probability)[1]
+                })
+
+            return return_results
         else:
             return [("un", 1.0)]
 
@@ -126,3 +134,4 @@ class ContentLanguageIdentifier:
 
 content_language_identifier = ContentLanguageIdentifier()
 identify_language = content_language_identifier.identify_lang
+predict_probabilities = content_language_identifier.identify_topn_langs
