@@ -1,0 +1,3 @@
+include requirements.txt
+include coffeehouse_languagedetection/utils/messages.properties
+recursive-include coffeehouse_languagedetection/profiles *
