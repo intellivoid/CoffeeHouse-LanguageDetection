@@ -132,6 +132,6 @@ class ContentLanguageIdentifier:
         )
 
 
-content_language_identifier = ContentLanguageIdentifier()
-identify_language = content_language_identifier.identify_lang
-predict_probabilities = content_language_identifier.identify_topn_langs
+_cld = ContentLanguageIdentifier()
+identify_language = _cld.identify_lang
+predict_probabilities = _cld.identify_topn_langs
