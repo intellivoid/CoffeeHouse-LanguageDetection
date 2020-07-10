@@ -9,7 +9,7 @@ class LanguagePrediction(object):
         """
         from coffeehouse_dltc.main import DLTC
         self.dltc = DLTC()
-        self.model_directory = os.path.join(os.path.dirname(__file__), 'data')
+        self.model_directory = os.path.join(os.path.dirname(__file__), 'data', 'langdetect_build')
         self.dltc.load_model_cluster(self.model_directory)
 
     def predict(self, text_input):
