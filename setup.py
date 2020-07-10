@@ -11,6 +11,16 @@ for file in data_files_fetch:
     if not os.path.isdir(file_path):
         data_files.append(file_path)
 
+
+model_file_path = os.path.join('coffeehouse_languagedetection', 'data', 'langdetect_build')
+
+model_files_fetch = os.listdir(os.path.join(os.getcwd(), model_file_path))
+model_files = []
+for file in model_files_fetch:
+    file_path = os.path.join(os.getcwd(), model_file_path, file)
+    if not os.path.isdir(file_path):
+        model_files.append(file_path)
+
 setup(
     name='coffeehouse_languagedetection',
     version='1.0.0',
@@ -25,7 +35,8 @@ setup(
     ],
     keywords='machine learning language detection',
     data_files=[
-        (os.path.join('coffeehouse_languagedetection', 'data'), data_files)
+        (os.path.join('coffeehouse_languagedetection', 'data'), data_files),
+        (os.path.join('coffeehouse_languagedetection', 'data', 'langdetect_build'), model_files)
     ],
     install_requires=[
         'scikit-learn',
