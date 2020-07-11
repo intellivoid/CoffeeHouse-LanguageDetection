@@ -1,3 +1,4 @@
+import operator
 import random
 import re
 
@@ -6,8 +7,8 @@ from six.moves import zip, xrange
 
 from .lang_detect_exception import ErrorCode, LangDetectException
 from .language import Language
-from .utils.ngram import NGram
-from .utils.unicode_block import unicode_block
+from .ldutils.ngram import NGram
+from .ldutils.unicode_block import unicode_block
 
 
 class Detector(object):
@@ -142,6 +143,15 @@ class Detector(object):
         if self.langprob is None:
             self._detect_block()
         return self._sort_probability(self.langprob)
+
+    def get_results(self):
+        return_results = []
+        if self.langprob is None:
+            self._detect_block()
+        for prediction in sorted(zip(self.langlist, self.langprob), key=operator.itemgetter(1), reverse=True):
+            return_results.append({"language": prediction[0], "probability": prediction[1]})
+            #return_results.append(prediction)
+        return return_results
 
     def _detect_block(self):
         self.cleaning_text()

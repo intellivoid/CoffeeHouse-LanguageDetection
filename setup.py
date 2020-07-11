@@ -49,12 +49,12 @@ setup(
         (os.path.join('coffeehouse_languagedetection', 'data', 'langdetect_build'), model_files),
         (os.path.join('coffeehouse_languagedetection', 'data', 'profiles'), profiles_files),
         (
-            os.path.join('coffeehouse_languagedetection', 'utils'),
-            [os.path.join(os.getcwd(), 'coffeehouse_languagedetection', 'utils', 'messages.properties')]
+            os.path.join('coffeehouse_languagedetection', 'ldutils'),
+            [os.path.join(os.getcwd(), 'coffeehouse_languagedetection', 'ldutils', 'messages.properties')]
         )
     ],
     install_requires=[
-        'scikit-learn',
+        'scikit-learn==0.22.0',
         'joblib',
         'six'
     ],

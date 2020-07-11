@@ -9,7 +9,7 @@ except ImportError:
 
 from .detector import Detector
 from .lang_detect_exception import ErrorCode, LangDetectException
-from .utils.lang_profile import LangProfile
+from .ldutils.lang_profile import LangProfile
 
 
 class DetectorFactory(object):
@@ -117,21 +117,27 @@ class DetectorFactory(object):
 PROFILES_DIRECTORY = path.join(path.dirname(__file__), 'data', 'profiles')
 _factory = None
 
+
 def init_factory():
     global _factory
     if _factory is None:
         _factory = DetectorFactory()
         _factory.load_profile(PROFILES_DIRECTORY)
 
-def detect(text):
+
+def detect(text, seed=None):
     init_factory()
     detector = _factory.create()
+    if seed is not None:
+        detector.seed = seed
     detector.append(text)
     return detector.detect()
 
 
-def detect_langs(text):
+def predict(text, seed=None):
     init_factory()
     detector = _factory.create()
+    if seed is not None:
+        detector.seed = seed
     detector.append(text)
-    return detector.get_probabilities()
+    return detector.get_results()
