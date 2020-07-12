@@ -1,9 +1,8 @@
 import operator
-import pathlib
 
 import joblib
 
-from . import utils
+from coffeehouse_languagedetection.utils import *
 
 DEFAULT_DATA_DIR: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "data"
 
@@ -21,7 +20,7 @@ class ContentLanguageIdentifier:
     def __init__(self, data_dir=DEFAULT_DATA_DIR, max_text_len=1000):
         self._version = 1.1
         self._model_id = self._get_model_id()
-        self.data_dir = utils.to_path(data_dir).resolve()
+        self.data_dir = to_path(data_dir).resolve()
         self.filename = self._model_id + ".pkl.gz"
         self.max_text_len = max_text_len
         self._pipeline = None
@@ -48,6 +47,7 @@ class ContentLanguageIdentifier:
             filename = fstub.format(self._version)
         return filename
 
+    # noinspection PyUnresolvedReferences
     def identify_lang(self, text):
         """
         Identify the most probable language identified in ``text``.
@@ -58,7 +58,7 @@ class ContentLanguageIdentifier:
         Returns:
             str: 2-letter language code of the most probable language.
         """
-        text_ = utils.to_collection(text[:self.max_text_len], str, list)
+        text_ = to_collection(text[:self.max_text_len], str, list)
         if self._is_valid(text_[0]):
             lang = self.pipeline.predict(text_).item()
             return lang
@@ -76,7 +76,7 @@ class ContentLanguageIdentifier:
             List[Tuple[str, float]]: 2-letter language code and its probability
             for the ``topn`` most probable languages.
         """
-        text_ = utils.to_collection(text[:self.max_text_len], str, list)
+        text_ = to_collection(text[:self.max_text_len], str, list)
         if self._is_valid(text_[0]):
             lang_probs = sorted(
                 zip(self.pipeline.classes_, self.pipeline.predict_proba(text_).flat),

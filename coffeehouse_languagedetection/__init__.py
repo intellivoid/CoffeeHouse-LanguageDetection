@@ -1,3 +1,8 @@
+from .server import *
+
+__all__ = ["Server"]
+
+
 def predict(text_input, dltc=True, ld=True, cld=True, seed=None):
     """
     Predicts the language using the three different methods

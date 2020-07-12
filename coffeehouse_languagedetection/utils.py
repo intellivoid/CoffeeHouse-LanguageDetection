@@ -1,6 +1,6 @@
+# noinspection DuplicatedCode
 import logging
 import pathlib
-import sys
 import warnings
 from typing import cast, Any, Collection, Dict, Iterable, Optional, Set, Tuple, Type, Union
 
@@ -20,30 +20,6 @@ def deprecated(message: str, *, action: str = "always"):
         warnings.simplefilter(action, DeprecationWarning)
         warnings.warn(message, DeprecationWarning, stacklevel=2)
 
-
-def get_config() -> Dict[str, Any]:
-    """
-    Get key configuration info about dev environment: OS, python, spacy, and textacy.
-
-    Returns:
-        dict
-    """
-    from spacy.about import __version__ as spacy_version
-    from spacy.util import get_data_path
-    from .about import __version__ as textacy_version
-
-    return {
-        "platform": sys.platform,
-        "python": sys.version,
-        "spacy": spacy_version,
-        "spacy_models": [
-            d.parts[-1]
-            for d in get_data_path().iterdir()
-            if (d.is_dir() or d.is_symlink())
-            and d.parts[-1] not in {"__cache__", "__pycache__"}
-        ],
-        "textacy": textacy_version,
-    }
 
 
 def print_markdown(items: Union[Dict[Any, Any], Iterable[Tuple[Any, Any]]]):
