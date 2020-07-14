@@ -56,7 +56,7 @@ class LanguagePrediction(object):
             if as_string:
                 return_results.append({"language": self.language_codes[language[0]], "probability": language[1]})
             else:
-                return_results.append({"language": self.language_codes[language[0]], "probability": str(anguage[1])})
+                return_results.append({"language": self.language_codes[language[0]], "probability": str(language[1])})
         return return_results
 
 
