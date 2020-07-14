@@ -37,7 +37,7 @@ class LanguagePrediction(object):
                                        "tamil": "ta", "telugu": "te", "tajik": "tg", "thai": "th", "tagalog": "tl",
                                        "turkish": "tr", "uyghur": "ug", "ukrainian": "uk", "urdu": "ur", "uzbek": "uz",
                                        "vietnamese": "vi", "xhosa": "xh", "yiddish": "yi", "yoruba": "yo",
-                                       "chinese_simplified": "zh", "chinese_traditional": "zh", "zulu": "zu"}
+                                       "chinese_simplified": "zh-cn", "chinese_traditional": "zh-tw", "zulu": "zu"}
 
     def predict(self, text_input, as_string=False):
         """
