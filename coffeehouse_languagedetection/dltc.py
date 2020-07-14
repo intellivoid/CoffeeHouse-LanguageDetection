@@ -39,11 +39,12 @@ class LanguagePrediction(object):
                                        "vietnamese": "vi", "xhosa": "xh", "yiddish": "yi", "yoruba": "yo",
                                        "chinese_simplified": "zh", "chinese_traditional": "zh", "zulu": "zu"}
 
-    def predict(self, text_input):
+    def predict(self, text_input, as_string=False):
         """
         Takes the user input and predicts if the input is either
         spam or ham
 
+        :param as_string:
         :param text_input:
         :return: Returns dictionary of predicted values.
         """
@@ -52,7 +53,10 @@ class LanguagePrediction(object):
         return_results = []
         for language in results:
             language = list(language)
-            return_results.append({"language": self.language_codes[language[0]], "probability": language[1]})
+            if as_string:
+                return_results.append({"language": self.language_codes[language[0]], "probability": language[1]})
+            else:
+                return_results.append({"language": self.language_codes[language[0]], "probability": str(anguage[1])})
         return return_results
 
 

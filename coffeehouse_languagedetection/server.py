@@ -44,7 +44,8 @@ class Server(object):
                                                         dltc=algorithm_dltc,
                                                         cld=algorithm_cld,
                                                         ld=algorithm_ld,
-                                                        seed=seed)
+                                                        seed=seed,
+                                                        as_string=True)
         response = {
             "status": True,
             "results": results

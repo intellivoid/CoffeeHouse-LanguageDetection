@@ -3,10 +3,11 @@ from .server import *
 __all__ = ["Server"]
 
 
-def predict(text_input, dltc=True, ld=True, cld=True, seed=None):
+def predict(text_input, dltc=True, ld=True, cld=True, seed=None, as_string=False):
     """
     Predicts the language using the three different methods
 
+    :param as_string:
     :param text_input:
     :param dltc:
     :param ld:
@@ -17,7 +18,7 @@ def predict(text_input, dltc=True, ld=True, cld=True, seed=None):
     results = {}
     if dltc:
         import coffeehouse_languagedetection.dltc
-        results["dltc"] = coffeehouse_languagedetection.dltc.predict(text_input)
+        results["dltc"] = coffeehouse_languagedetection.dltc.predict(text_input, as_string)
     if ld:
         import coffeehouse_languagedetection.ld
         if seed is None:
