@@ -6,7 +6,7 @@ __all__ = ['Server']
 
 class Server(object):
 
-    def __init__(self, port=5602):
+    def __init__(self, port=5606):
         """
         Public Constructor
         :param port:
